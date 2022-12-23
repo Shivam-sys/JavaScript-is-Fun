@@ -1,3 +1,0 @@
-# JS-Practice
-
-test change
