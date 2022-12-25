@@ -35,6 +35,13 @@ class LinkedList {
     this.length++;
   }
 
+  removeFromHead() {
+    if (!this.head) {
+      return;
+    }
+    this.head = this.head.next;
+  }
+
   // You can use this function to help debug
   print() {
     let current = this.head;
