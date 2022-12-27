@@ -29,7 +29,6 @@ class HashTable {
   insertNoCollisions(key, value) {
     const keyValuePair = new KeyValuePair(key, value);
     const index = this.hashMod(key);
-    console.log(this.data);
     if (!this.data[index]) {
       this.data[index] = keyValuePair;
       this.count++;
@@ -38,11 +37,43 @@ class HashTable {
   }
 
   insertWithHashCollisions(key, value) {
-    // Your code here
+    const keyValuePair = new KeyValuePair(key, value);
+    const index = this.hashMod(key);
+    if (this.data[index]) keyValuePair.next = this.data[index];
+    this.data[index] = keyValuePair;
+    this.count++;
   }
 
   insert(key, value) {
-    // Your code here
+    const keyValuePair = new KeyValuePair(key, value);
+    const index = this.hashMod(key);
+    if (this.data[index]) {
+      let tempNode = this._getNodeWithMatchingKey(
+        this.data[index],
+        keyValuePair.key
+      );
+      if (tempNode) {
+        tempNode.value = keyValuePair.value;
+      } else {
+        keyValuePair.next = this.data[index];
+        this.data[index] = keyValuePair;
+        this.count++;
+      }
+    } else {
+      this.data[index] = keyValuePair;
+      this.count++;
+    }
+  }
+
+  _getNodeWithMatchingKey(head, key) {
+    let current = head;
+    while (current) {
+      if (current.key === key) {
+        return current;
+      }
+      current = current.next;
+    }
+    return null;
   }
 }
 
