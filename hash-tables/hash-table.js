@@ -1,4 +1,4 @@
-const sha256 = require('js-sha256');
+const sha256 = require("js-sha256");
 
 class KeyValuePair {
   constructor(key, value) {
@@ -9,21 +9,32 @@ class KeyValuePair {
 }
 
 class HashTable {
-
   constructor(numBuckets = 4) {
-    // Your code here
+    this.data = new Array(numBuckets).fill(null);
+    this.capacity = numBuckets;
+    this.count = 0;
   }
 
   hash(key) {
-    // Your code here
+    let str = sha256(key);
+    let hex = str.slice(0, 8);
+    let hashValue = parseInt(hex, 16);
+    return hashValue;
   }
 
   hashMod(key) {
-    // Your code here
+    return this.hash(key) % this.capacity;
   }
 
   insertNoCollisions(key, value) {
-    // Your code here
+    const keyValuePair = new KeyValuePair(key, value);
+    const index = this.hashMod(key);
+    console.log(this.data);
+    if (!this.data[index]) {
+      this.data[index] = keyValuePair;
+      this.count++;
+    } else
+      throw new Error("hash collision or same key/value pair already exists!");
   }
 
   insertWithHashCollisions(key, value) {
@@ -33,8 +44,6 @@ class HashTable {
   insert(key, value) {
     // Your code here
   }
-
 }
-
 
 module.exports = HashTable;
