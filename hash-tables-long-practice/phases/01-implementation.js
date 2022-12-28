@@ -33,22 +33,27 @@ class HashTable {
 
   _getNodeWithMatchingKey(head, key) {
     let current = head;
+    let prev = null;
     while (current) {
       if (current.key === key) {
-        return current;
+        return { prevNode: prev, currentNode: current };
       }
+      prev = current;
       current = current.next;
     }
-    return null;
+    return { prevNode: null, currentNode: null };
   }
 
   insert(key, value) {
     const kvpair = new KeyValuePair(key, value);
     const index = this.hashMod(key);
-    let node = this._getNodeWithMatchingKey(this.data[index], kvpair.key);
+    let { currentNode } = this._getNodeWithMatchingKey(
+      this.data[index],
+      kvpair.key
+    );
     if (this.data[index]) {
-      if (node) {
-        node.value = kvpair.value;
+      if (currentNode) {
+        currentNode.value = kvpair.value;
       } else {
         kvpair.next = this.data[index];
         this.data[index] = kvpair;
@@ -63,8 +68,8 @@ class HashTable {
 
   read(key) {
     const index = this.hashMod(key);
-    let node = this._getNodeWithMatchingKey(this.data[index], key);
-    if (node) return node.value;
+    let { currentNode } = this._getNodeWithMatchingKey(this.data[index], key);
+    if (currentNode) return currentNode.value;
     return;
   }
 
@@ -83,30 +88,28 @@ class HashTable {
   }
 
   delete(key) {
-    // TODO
     const index = this.hashMod(key);
-    if (this.data[index].key == key && this.data[index].next == null) {
+    let { prevNode, currentNode } = this._getNodeWithMatchingKey(
+      this.data[index],
+      key
+    );
+    // If key located at 1st pos and having nothing on next.
+    if (this.data[index]?.key == key && !this.data[index].next) {
       this.data[index] = null;
       this.count--;
-      return;
     }
-    let head = this.data[index];
-    let curr = this.data[index];
-    let prev = null;
-    while (curr) {
-      if (curr.key === key) {
-        if (curr === head) {
-          curr = curr.next;
-        } else {
-          prev.next = curr.next;
-        }
-        this.count--;
-        return;
-      }
-      prev = curr;
-      curr = curr.next;
+    // If key located at first but also have next element
+    else if (this.data[index]?.key == key && this.data[index].next) {
+      this.data[index] = this.data[index].next;
+      this.count--;
     }
-    return "Key not found";
+    // If key located in middle of list or at end.
+    else if (currentNode) {
+      prevNode.next = currentNode.next;
+      this.count--;
+    } else {
+      return "Key not found";
+    }
   }
 }
 
