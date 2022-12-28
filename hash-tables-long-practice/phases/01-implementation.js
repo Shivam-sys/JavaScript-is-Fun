@@ -63,7 +63,8 @@ class HashTable {
       this.data[index] = kvpair;
       this.count++;
     }
-    // if (this.count >= this.capacity) this.resize();
+    let loadFactor = (0.7 * this.count) / this.capacity;
+    if (loadFactor > 0.7) this.resize();
   }
 
   read(key) {
