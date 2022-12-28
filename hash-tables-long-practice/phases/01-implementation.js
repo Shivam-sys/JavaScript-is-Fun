@@ -58,7 +58,7 @@ class HashTable {
       this.data[index] = kvpair;
       this.count++;
     }
-    if (this.count >= this.capacity) this.resize();
+    // if (this.count >= this.capacity) this.resize();
   }
 
   read(key) {
@@ -69,16 +69,44 @@ class HashTable {
   }
 
   resize() {
-    // TODO: Implement this.
     let newHashTable = new HashTable(this.capacity * 2);
-    for (let i = 0; i < this.count; i++) {
-      newHashTable.data[i] = this.data[i];
+    for (let i = 0; i < this.capacity; i++) {
+      let curr = this.data[i];
+      while (curr) {
+        newHashTable.insert(curr.key, curr.value);
+        curr = curr.next;
+      }
     }
-    newHashTable.count = this.count;
+    this.capacity = newHashTable.capacity;
+    this.count = newHashTable.count;
+    this.data = newHashTable.data;
   }
 
   delete(key) {
-    // Your code here
+    // TODO
+    const index = this.hashMod(key);
+    if (this.data[index].key == key && this.data[index].next == null) {
+      this.data[index] = null;
+      this.count--;
+      return;
+    }
+    let head = this.data[index];
+    let curr = this.data[index];
+    let prev = null;
+    while (curr) {
+      if (curr.key === key) {
+        if (curr === head) {
+          curr = curr.next;
+        } else {
+          prev.next = curr.next;
+        }
+        this.count--;
+        return;
+      }
+      prev = curr;
+      curr = curr.next;
+    }
+    return "Key not found";
   }
 }
 
