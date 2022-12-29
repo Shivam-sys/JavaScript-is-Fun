@@ -17,29 +17,25 @@ function insertionSort(arr) {
   Return the sorted array
   */
 
+  // ! WORKING ONLY IF LAST ELEMENT OF ARR IS LARGEST, and no duplicates present.
+  // TODO: Make it work even if last element is not largest, and with duplicates.
   let copyarr = [...arr];
   let sorted = [];
-  console.log(sorted.join(","));
-  sorted = [copyarr.pop()];
+  let insertionPoint = 0;
   while (copyarr.length !== 0) {
     console.log(sorted.join(","));
-    popped = copyarr.pop();
-    for (i = sorted.length - 1; i >= 0; i--) {
+    let popped = copyarr.pop();
+    for (let i = sorted.length - 1; i >= 0; i--) {
       if (popped > sorted[i]) {
-        if (i != sorted.length - 1) {
-          var inMiddle = true;
+        if (i !== sorted.length - 1) {
+          insertionPoint = i + 1;
+        } else {
+          insertionPoint = i;
         }
         break;
-      } else if (popped < sorted[i]) {
-        if (i == 0) {
-          break;
-        }
-        continue;
       }
     }
-    if (inMiddle) {
-      sorted.splice(i + 1, 0, popped);
-    } else sorted.splice(i, 0, popped);
+    sorted.splice(insertionPoint, 0, popped);
   }
   return sorted;
 }
