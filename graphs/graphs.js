@@ -37,10 +37,28 @@ function traverseGraphBFS(n) {
   }
 }
 
-traverseGraphBFS(3);
+// *DFS (uses stack)
+function traverseGraphDFS(node) {
+  let stack = [];
+  let visited = new Set();
+  stack.push(node);
+  visited.add(node);
+  while (stack.length) {
+    let node = stack.pop();
+    console.log(node);
+    adjList[node]
+      .filter((n) => !visited.has(n))
+      .forEach((n) => {
+        visited.add(n);
+        stack.push(n);
+      });
+  }
+  return false;
+}
 
 //* DFS (uses recursion)
-function traverseGraphDFS(node, discovered = []) {
+// !SEEMS SOME PROBLEM
+function traverseGraphDFSrecur(node, discovered = []) {
   console.log(node);
   discovered[node] = true;
   for (let i = 0; i < adjList2[node].length; i++) {
@@ -51,4 +69,9 @@ function traverseGraphDFS(node, discovered = []) {
   }
 }
 
-traverseGraphDFS(3);
+console.log("*** TraverseGraphBFS(3) ***");
+traverseGraphBFS(3);
+console.log("*** TraverseGraphDFSrecur(3) ***");
+traverseGraphDFSrecur(3);
+console.log("*** TraverseGraphDFS(4) ***");
+traverseGraphDFS(4);
