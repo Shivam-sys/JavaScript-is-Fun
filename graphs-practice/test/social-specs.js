@@ -131,11 +131,15 @@ describe ('Tree practice', function () {
 
       userID1 = socialNetwork.addUser("User 1");
       userID2 = socialNetwork.addUser("User 2");
+      userID3 = socialNetwork.addUser("User 3");
       socialNetwork.follow(userID1, userID2);
-
+      expect(socialNetwork.getFollowers(userID2)).to.have.keys(["1"]);
+      
       expect(socialNetwork.getFollowers(userID1).size).to.equal(0);
       expect(socialNetwork.getFollowers(userID2).size).to.equal(1);
-      expect(socialNetwork.getFollowers(userID2)).to.have.keys([1]);
+      socialNetwork.follow(userID3, userID2);
+      expect(socialNetwork.getFollowers(userID2).size).to.equal(2);
+      expect(socialNetwork.getFollowers(userID2)).to.have.keys(["1","3"]);
     });
 
   });
