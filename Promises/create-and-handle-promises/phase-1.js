@@ -1,29 +1,38 @@
 function stretch() {
-  const p = new Promise((res, rej) => {
-    res(console.log("done stretching"));
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      console.log("done stretching");
+      res();
+    }, 1000);
   });
-  return p;
 }
 
 function runOnTreadmill() {
-  const p = new Promise((res, rej) => {
-    res(console.log("done running on treadmill"));
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      console.log("done running on treadmill");
+      res();
+    }, 500);
   });
-  return p;
 }
 
 function liftWeights() {
-  const p = new Promise((res, rej) => {
-    res(console.log("done lifting weights"));
+  return new Promise((res, rej) => {
+    setTimeout(() => {
+      console.log("done lifting weights");
+      res();
+    }, 2000);
   });
-  return p;
 }
 
 function workout() {
   stretch()
     .then(runOnTreadmill)
     .then(liftWeights)
-    .then(() => console.log("done working out"));
+    .then(() => console.log("done working out"))
+    .catch((e) => {
+      console.log(e);
+    });
 }
 
 /* ============================ TEST YOUR CODE ============================
