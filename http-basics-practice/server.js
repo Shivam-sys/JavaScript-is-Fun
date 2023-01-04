@@ -1,30 +1,51 @@
 //* Create Own Server
 const http = require("http");
 
-const responseBody = `
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello there!</h1>
-  </body>
-  </html>
-`;
-
 const server = http.createServer((req, res) => {
-  res.status = 200;
-  res.setHeader("Content-Type", "text/css");
-  res.write("Hello, ");
-  res.write("World!");
-  res.end(responseBody);
+  console.log(`${req.method} ${req.url}`);
+
+  let reqBody = "";
+  req.on("data", (data) => {
+    reqBody += data;
+  });
+
+  // When the request is finished processing the entire body
+  req.on("end", () => {
+    // Parsing the body of the request
+    if (reqBody) {
+      req.body = reqBody
+        .split("&")
+        .map((keyValuePair) => keyValuePair.split("="))
+        .map(([key, value]) => [key, value.replace(/\+/g, " ")])
+        .map(([key, value]) => [key, decodeURIComponent(value)])
+        .reduce((acc, [key, value]) => {
+          acc[key] = value;
+          return acc;
+        }, {});
+      console.log(req.body);
+    }
+    // Do not edit above this line
+
+    // define route handlers here
+    if (req.method == "GET" && req.url === "/") {
+      res.statusCode = 200;
+      res.setHeader("Content-type", "text/plain");
+      return res.end("Dog Club");
+    }
+    if (req.method == "GET" && req.url === "/dogs") {
+      res.statusCode = 200;
+      res.setHeader("Content-type", "text/plain");
+      return res.end("Dogs Index");
+    }
+
+    // Do not edit below this line
+    // Return a 404 response when there is no matching route handler
+    res.statusCode = 404;
+    res.setHeader("Content-Type", "text/plain");
+    return res.end("No matching route handler found for this endpoint");
+  });
 });
 
-const PORT = 5000;
+const port = 5000;
 
-server.listen(PORT, () => {
-  console.log("Server listenting on port", PORT);
-});
+server.listen(port, () => console.log("Server is listening on port", port));
