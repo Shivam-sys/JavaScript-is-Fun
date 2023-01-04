@@ -35,6 +35,15 @@ function workout() {
     });
 }
 
+// Using this will run all promises at same time, coz functions are invoked which returns a promise.
+// Promise.all([stretch(), runOnTreadmill(), liftWeights()]).then(() => {
+//   console.log("done working out");
+// });
+// Outputs
+// done running on treadmill
+// done stretching
+// done lifting weights
+// done working out
 /* ============================ TEST YOUR CODE ============================
 
 Run the file (`node phase-1.js`) and check your output against the expected
