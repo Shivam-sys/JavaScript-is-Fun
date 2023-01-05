@@ -35,7 +35,7 @@ const server = http.createServer((req, res) => {
     const ext = path.extname(req.url);
     if (req.method === "GET" && ext) {
       try {
-        const resBody = readFileSync('.' + "/public" + req.url);
+        const resBody = readFileSync("." + "/public" + req.url);
         res.statusCode = 200;
         if (ext === ".jpg" || ext === ".jpeg") {
           res.setHeader("Content-Type", "image/jpeg");
@@ -65,4 +65,6 @@ const server = http.createServer((req, res) => {
 // Set the port to 3000
 const port = 3000;
 // Tell the port to listen for requests on localhost:3000
-server.listen(port, () => console.log("Cookies Practice is running on port", port));
+server.listen(port, () =>
+  console.log("Cookies Practice is running on port", port)
+);
