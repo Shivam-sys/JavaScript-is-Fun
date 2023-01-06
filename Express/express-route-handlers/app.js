@@ -48,6 +48,24 @@ app.post("/artists", (req, res) => {
   res.status(201).header("Content-type: application/json").json(newArtist);
 });
 
+app.get("/artists/:artistId", (req, res) => {
+  const artist = getArtistByArtistId(req.params.artistId);
+  res.status(200).header("Content-type: application/json").json(artist);
+});
+
+app.put("/artists/:artistId", (req, res) => {
+  let artist = editArtistByArtistId(req.params.artistId, req.body);
+  res.status(200).header("Content-type: application/json").json(artist);
+});
+
+app.delete("/artists/:artistId", (req, res) => {
+  deleteArtistByArtistId(req.params.artistId);
+  res
+    .status(200)
+    .header("Content-type: application/json")
+    .json({ message: "Successfully deleted" });
+});
+
 app.get("/artists/latest", (req, res) => {
   const latestArtist = getLatestArtist();
   res.status(200).header("Content-type: application/json").json(latestArtist);
