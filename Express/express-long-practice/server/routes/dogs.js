@@ -87,10 +87,13 @@ const deleteDog = (req, res) => {
 // Your code here
 const express = require("express");
 const router = express.Router();
+const dog_foods = require("./dog-foods");
 
 router.get("/", (req, res) => {
   getAllDogs(req, res);
 });
+
+router.use("/:dogId/foods", dog_foods);
 
 router.get("/:dogId", validateDogId, (req, res) => {
   getDogById(req, res);

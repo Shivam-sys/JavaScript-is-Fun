@@ -44,17 +44,17 @@ app.get("/test-error", logger, async (req, res) => {
 });
 
 // TODO : Learn Error Handling
-const throwwErr = (req, res, next) => {
-  let err = new Error("The requested resource couldn't be found.");
-  err.statusCode = 500;
-  err.stack = err.stack;
-  // res.on("finish", () => {});
-  next(err);
-};
+// const throwwErr = (req, res, next) => {
+//   let err = new Error("The requested resource couldn't be found.");
+//   err.statusCode = 500;
+//   err.stack = err.stack;
+//   // res.on("finish", () => {});
+//   next(err);
+// };
 
-app.use(throwwErr, (err, req, res, next) => {
-  console.error(err);
-  res.status(err.statusCode).send(err.message);
-});
+// app.use(throwwErr, (err, req, res, next) => {
+//   console.error(err);
+//   res.status(err.statusCode).send(err.message);
+// });
 const port = 5000;
 app.listen(port, () => console.log("Server is listening on port", port));
