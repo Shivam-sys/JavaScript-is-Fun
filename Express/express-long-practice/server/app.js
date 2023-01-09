@@ -1,8 +1,13 @@
 const express = require("express");
+const dogs = require("./routes/dogs");
 // Use set NODE_ENV=production , to hide error log from non admins.
 // NOTE: express-async-errors prevents server to crash incase of errors, so must use.
 require("express-async-errors");
 const app = express();
+
+app.use(express.json());
+
+app.use("/dogs", dogs);
 
 const logger = (req, res, next) => {
   console.log(req.method, req.url);
@@ -13,7 +18,8 @@ const logger = (req, res, next) => {
   });
   next();
 };
-app.use("/static", express.static("assets"));
+
+app.use("/static", logger, express.static("assets"));
 // For testing purposes, GET /
 app.get("/", logger, (req, res) => {
   res.json(
@@ -21,7 +27,6 @@ app.get("/", logger, (req, res) => {
   );
 });
 
-app.use(express.json());
 // For testing express.json middleware
 app.post("/test-json", logger, (req, res, next) => {
   // send the body as JSON with a Content-Type header of "application/json"
