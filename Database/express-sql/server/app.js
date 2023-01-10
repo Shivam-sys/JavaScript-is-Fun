@@ -2,15 +2,19 @@
 const express = require("express");
 const app = express();
 
+// express-async-errors
+require("express-async-errors");
+
 require("dotenv").config();
 
-// USE .env VARIABLE 
+// USE .env VARIABLE
 const DATA_SOURCE = process.env.DATA_SOURCE;
 
 /**
  * Step 1 - Connect to the database
  */
-// Your code here
+const sqlite3 = require("sqlite3");
+const db = new sqlite3.Database(DATA_SOURCE, sqlite3.OPEN_READWRITE);
 
 // Express using json - DO NOT MODIFY
 app.use(express.json());
@@ -30,16 +34,21 @@ app.get("/colors/:id", (req, res, next) => {
   /**
    * STEP 2A - SQL Statement
    */
-  // Your code here
+  const query = "SELECT * FROM colors WHERE id = ?";
   /**
    * STEP 2B - SQL Parameters
    */
-  // Your code here
+  const params = [req.params.id];
   /**
    * STEP 2C - Call database function
    *  - return response
    */
-  // Your code here
+  db.get(query, params, (err, row) => {
+    if (err) next(err);
+    else {
+      res.json(row);
+    }
+  });
 });
 
 // Add color
@@ -59,6 +68,17 @@ app.get("/colors/add/:name", (req, res, next) => {
    *  - return new row
    */
   // Your code here
+  db.run(sql, params, (err) => {
+    if (err) next(err);
+    else {
+      db.get(sqlLast, [], (err, row) => {
+        if (err) next(err);
+        else {
+          res.json(row);
+        }
+      });
+    }
+  });
 });
 
 // Root route - DO NOT MODIFY
