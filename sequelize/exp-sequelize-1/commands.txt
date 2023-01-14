@@ -1,0 +1,6 @@
+npx sequelize-cli init
+npx sequelize db:migrate
+npx sequelize-cli migration:generate --name create-color
+
+Create Model
+npx Sequelize-cli model:generate --name Color --attributes name:string
