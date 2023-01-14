@@ -1,0 +1,9 @@
+1. create .sequelizerc 
+2. create .env with DB_FILE=db/dev.db
+3. npx sequelize-cli model:generate --name Trees --attributes tree:string,location:string,height_ft:float
+4. Do changes in models/tree.js or migrations/XXXXXXXXX-create-tree.js (check the migration (for constraints) or model (for validations))
+5. npx sequelize-cli db:migrate => this will create the db for us.
+6. npx sequelize-cli seed:generate --name user => generate seed file.
+7. Manually edit the seeder file in seeders folder.
+8. npx dotenv sequelize-cli db:seed:all
+9. To undo seed or migration => npx dotenv db:seed:all / db.migration:all (all can be replace with actual file name)
