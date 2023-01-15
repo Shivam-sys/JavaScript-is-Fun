@@ -47,6 +47,45 @@ app.post("/puppies", async (req, res, next) => {
   }
 });
 
+// next: Update a puppy by id
+app.put("/puppies/:puppyId", async (req, res, next) => {
+  try {
+    const puppyId = req.params.puppyId;
+    const puppyToUpdate = await Puppy.findByPk(puppyId);
+    if (req.body.age_yrs !== undefined) {
+      puppyToUpdate.age_yrs = req.body.age_yrs;
+    }
+    if (req.body.weight_lbs !== undefined) {
+      puppyToUpdate.weight_lbs = req.body.weight_lbs;
+    }
+    if (req.body.microchipped !== undefined) {
+      puppyToUpdate.microchipped = req.body.microchipped;
+    }
+    await puppyToUpdate.save();
+    res.status(200).json({
+      message: `Successfully updated puppy with id ${puppyId}.`,
+      puppy: await Puppy.findByPk(puppyId),
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// next: Delete a puppy by id
+app.delete("/puppies/:puppyId", async (req, res, next) => {
+  try {
+    const puppyId = req.params.puppyId;
+    const puppyToDelete = await Puppy.findByPk(puppyId);
+    await puppyToDelete.destroy();
+    res.status(200).json({
+      message: `Deleted record with id ${puppyId}`,
+      deletedRecord: puppyToDelete,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // Root route - DO NOT MODIFY
 app.get("/", (req, res) => {
   res.json({
