@@ -55,14 +55,35 @@ function App() {
       {/* User controls */}
       <div className="button-controls">
         Size:
-        <button onClick={() => setSize("s")}>Small</button>
-        <button onClick={() => setSize("m")}>Medium</button>
-        <button onClick={() => setSize("l")}>Large</button>
-        <button onClick={() => setSize("xl")}>X-Large</button>
+        <button
+          className={size === "s" ? "active_btn" : ""}
+          onClick={() => setSize("s")}
+        >
+          Small
+        </button>
+        <button
+          className={size === "m" ? "active_btn" : ""}
+          onClick={() => setSize("m")}
+        >
+          Medium
+        </button>
+        <button
+          className={size === "l" ? "active_btn" : ""}
+          onClick={() => setSize("l")}
+        >
+          Large
+        </button>
+        <button
+          className={size === "xl" ? "active_btn" : ""}
+          onClick={() => setSize("xl")}
+        >
+          X-Large
+        </button>
       </div>
       <div className="button-controls">
         Feather Count:
         <input
+          className="input_box"
           type="number"
           onChange={(e) => setFeatherCount(e.currentTarget.value)}
           defaultValue={0}
