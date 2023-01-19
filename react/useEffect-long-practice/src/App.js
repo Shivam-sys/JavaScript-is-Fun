@@ -4,6 +4,7 @@ import PictureDisplay from "./components/PictureDisplay";
 
 function App() {
   const [size, setSize] = useState("s");
+  const [sizeClass, setSizeClass] = useState("");
   const [featherCount, setFeatherCount] = useState(0);
   const [featherColors, setFeatherColors] = useState([]);
   const [isRed, setIsRed] = useState(false);
@@ -11,6 +12,25 @@ function App() {
   const [isBrown, setIsBrown] = useState(false);
   const [isLightBrown, setIsLightBrown] = useState(false);
   const [isYellow, setIsYellow] = useState(false);
+
+  useEffect(() => {
+    let cname = "";
+    switch (size) {
+      case "m":
+        cname = "medium";
+        break;
+      case "l":
+        cname = "large";
+        break;
+      case "xl":
+        cname = "xlarge";
+        break;
+      default:
+        cname = "small";
+        break;
+    }
+    setSizeClass(cname);
+  }, [size]);
 
   useEffect(() => {
     // console.log("Color Change :: red?", isRed);
@@ -92,11 +112,11 @@ function App() {
       {/* Generated display based on user selections above */}
       <h3 className="button-controls">Enjoy your turkey</h3>
       <PictureDisplay
-        size={size}
+        sizeClass={sizeClass}
         featherCount={featherCount}
         featherColors={featherColors}
       />
-      <Message size={size} featherCount={featherCount} />
+      <Message sizeClass={sizeClass} featherCount={featherCount} />
     </>
   );
 }

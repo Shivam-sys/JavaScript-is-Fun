@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import turkey from "../images/turkey.png";
 import feather1 from "../images/feather1.svg";
 import feather2 from "../images/feather2.svg";
@@ -24,14 +24,13 @@ const feathers = [
   featherA,
 ];
 
-function PictureDisplay({ size, featherCount, featherColors }) {
-  const [sizeClass, setSizeClass] = useState("");
+function PictureDisplay({ sizeClass, featherCount, featherColors }) {
   // useEffect(() => {
   //   console.log("PictureDisplay", size, featherCount, featherColors);
   // });
   useEffect(() => {
-    console.log("PictureDisplay size", size);
-  }, [size]);
+    console.log("PictureDisplay size", sizeClass);
+  }, [sizeClass]);
 
   useEffect(() => {
     console.log("PictureDisplay feather count", featherCount);
@@ -40,26 +39,6 @@ function PictureDisplay({ size, featherCount, featherColors }) {
   useEffect(() => {
     console.log("PictureDisplay feather colors", featherColors);
   }, [featherColors]);
-
-  useEffect(() => {
-    console.log("PictureDisplay size", size);
-    let cname = "";
-    switch (size) {
-      case "m":
-        cname = "medium";
-        break;
-      case "l":
-        cname = "large";
-        break;
-      case "xl":
-        cname = "xlarge";
-        break;
-      default:
-        cname = "small";
-        break;
-    }
-    setSizeClass(cname);
-  }, [size]);
 
   const colors = [];
   if (!featherColors || featherColors.length === 0) featherColors = [""];
