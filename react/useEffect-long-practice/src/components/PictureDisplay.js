@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import turkey from "../images/turkey.png";
 import feather1 from "../images/feather1.svg";
 import feather2 from "../images/feather2.svg";
@@ -23,26 +24,59 @@ const feathers = [
   featherA,
 ];
 
-function PictureDisplay ({ size, featherCount, featherColors }) {
-  console.log('PictureDisplay', size, featherCount, featherColors);
+function PictureDisplay({ size, featherCount, featherColors }) {
+  const [sizeClass, setSizeClass] = useState("");
+  // useEffect(() => {
+  //   console.log("PictureDisplay", size, featherCount, featherColors);
+  // });
+  useEffect(() => {
+    console.log("PictureDisplay size", size);
+  }, [size]);
 
-  // TODO: Wrap in useEffect
+  useEffect(() => {
+    console.log("PictureDisplay feather count", featherCount);
+  }, [featherCount]);
+
+  useEffect(() => {
+    console.log("PictureDisplay feather colors", featherColors);
+  }, [featherColors]);
+
+  useEffect(() => {
+    console.log("PictureDisplay size", size);
+    let cname = "";
+    switch (size) {
+      case "m":
+        cname = "medium";
+        break;
+      case "l":
+        cname = "large";
+        break;
+      case "xl":
+        cname = "xlarge";
+        break;
+      default:
+        cname = "small";
+        break;
+    }
+    setSizeClass(cname);
+  }, [size]);
+
   const colors = [];
-  if (!featherColors || featherColors.length === 0) featherColors = [''];
-  for (let i=0; i<featherCount; i++) {
+  if (!featherColors || featherColors.length === 0) featherColors = [""];
+  for (let i = 0; i < featherCount; i++) {
     colors.push(featherColors[i % featherColors.length]);
   }
 
   return (
-    <div className={`image-area medium`}>
-      {colors.map((c, i) =>
-        <img  
-          key={feathers[i]} 
-          src={feathers[i]} 
-          className={`image-feather ${c}`} 
-          alt="" 
+    <div className={`image-area ${sizeClass}`}>
+      {colors.map((c, i) => (
+        <img
+          key={feathers[i]}
+          src={feathers[i]}
+          className={`image-feather ${c}`}
+          alt=""
         />
-      )}
+      ))}
 
       <img src={turkey} className="image-turkey" alt="turkey" />
     </div>
