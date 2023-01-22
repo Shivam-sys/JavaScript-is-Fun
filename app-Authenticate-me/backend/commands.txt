@@ -17,6 +17,7 @@ yarn add the following packages as dependencies:
 
 yarn add --dev the following packages as dev-dependencies:
     dotenv-cli - use dotenv in the command line
+    nodemon - hot reload server backend files
 
 2. Create .env file from .env.example
 3. Create config/index.js 
@@ -45,7 +46,28 @@ yarn add --dev the following packages as dev-dependencies:
  - this will create a User model with given attributes
 2. Run npx dotenv sequelize db:migrate
 3. Incase of error, undo the migration first, change the file, then migrate again
- - npx dotenv sequelize db:migrate:undo
+ - npx dotenv sequelize db:migrate:undo / 
 
 ## User model validation
 1. add Sequelize model-level constraints in models/user.js.
+
+## User Seeds
+1. Generate a user seeder file for the demo user with the following command:
+  - npx sequelize seed:generate --name demo-user
+* In any case of error, run these commands again *
+    - npx dotenv sequelize db:migrate:undo
+    - npx dotenv sequelize db:migrate
+    - npx dotenv sequelize db:seed:undo / npx dotenv sequelize db:seed:undo:all
+    - npx dotenv sequelize db:seed
+
+======== Commands worth remembering =========
+dropdb dbname : to delete db 
+psql -l : to see all database
+psql <db_name> : to use database
+psql <db_name> -c "\dt" : to see tables in the database
+psql <database name> -c 'SELECT * FROM "tablename"' : to SELECT all from table.
+
+
+psql -c "CREATE USER <username> PASSWORD '<password>' CREATEDB" - create user with same credentials in .env file
+npx dotenv sequelize db:create 
+======= or taking a peek at ================
