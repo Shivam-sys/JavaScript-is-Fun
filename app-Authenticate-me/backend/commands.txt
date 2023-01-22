@@ -30,5 +30,6 @@ yarn add --dev the following packages as dev-dependencies:
 4. create a user using the same credentials in the .env file.
     - psql -c "CREATE USER <username> PASSWORD '<password>' CREATEDB"
     
+## Express setup
 
-
+1. Create app.js, routes/index.js, bin/www and add scripts to package.json
