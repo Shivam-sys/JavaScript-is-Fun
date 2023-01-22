@@ -4,6 +4,8 @@ router.post('/test', function(req, res) {
   res.json({ requestBody: req.body });
 });
 
+// Below routes are just for testing purposes
+
 // GET /api/set-token-cookie
 const asyncHandler = require('express-async-handler');
 const { setTokenCookie } = require('../../utils/auth');
@@ -23,6 +25,16 @@ const { restoreUser } = require('../../utils/auth.js');
 router.get(
   '/restore-user',
   restoreUser,
+  (req, res) => {
+    return res.json(req.user);
+  }
+);
+
+// GET /api/require-auth
+const { requireAuth } = require('../../utils/auth.js');
+router.get(
+  '/require-auth',
+  requireAuth,
   (req, res) => {
     return res.json(req.user);
   }
