@@ -1,0 +1,34 @@
+yarn add the following packages as dependencies:
+    bcryptjs - password hashing
+    cookie-parser - parsing cookies from requests
+    cors - CORS
+    csurf - CSRF protection
+    dotenv - load environment variables into Node.js from a .env file
+    express - Express
+    express-async-handler - handling async route handlers
+    express-validator - validation of request bodies
+    helmet - security middleware
+    jsonwebtoken - JWT
+    morgan - logging information about server requests/responses
+    per-env - use environment variables for starting app differently
+    pg@">=8.4.1" - PostgresQL greater or equal to version 8.4.1
+    sequelize@5 - Sequelize
+    sequelize-cli@5 - use sequelize in the command line
+
+yarn add --dev the following packages as dev-dependencies:
+    dotenv-cli - use dotenv in the command line
+
+2. Create .env file from .env.example
+3. Create config/index.js 
+
+## sequelize setup
+
+1. Create .sequelizerc 
+2. Initialize Sequelize to the db folder by running:
+    - npx sequelize init -> this will create config/database.js, models, migrations, and seeders.
+3. Replace the content of config/database.js with currrent content.
+4. create a user using the same credentials in the .env file.
+    - psql -c "CREATE USER <username> PASSWORD '<password>' CREATEDB"
+    
+
+
