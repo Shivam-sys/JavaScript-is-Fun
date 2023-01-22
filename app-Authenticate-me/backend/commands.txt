@@ -34,3 +34,15 @@ yarn add --dev the following packages as dev-dependencies:
 
 1. Create app.js, routes/index.js, bin/www and add scripts to package.json
 2. Run npm start
+
+## More routes and error handling
+1. Create api/index.js folder inside routes.
+2. Also write error handling middlewares in the end of app.js.
+
+## Users table migrations
+1. generate a migration and model. Inside backend folder, run:
+ - npx sequelize model:generate --name User --attributes username:string,email:string,hashedPassword:string
+ - this will create a User model with given attributes
+2. Run npx dotenv sequelize db:migrate
+3. Incase of error, undo the migration first, change the file, then migrate again
+ - npx dotenv sequelize db:migrate:undo
