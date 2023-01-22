@@ -46,3 +46,6 @@ yarn add --dev the following packages as dev-dependencies:
 2. Run npx dotenv sequelize db:migrate
 3. Incase of error, undo the migration first, change the file, then migrate again
  - npx dotenv sequelize db:migrate:undo
+
+## User model validation
+1. add Sequelize model-level constraints in models/user.js.
