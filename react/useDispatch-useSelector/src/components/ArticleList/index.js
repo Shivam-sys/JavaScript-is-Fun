@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import SingleArticle from "../SingleArticle";
 import { loadArticles } from "../../store/articleReducer";
 import { NavLink } from "react-router-dom";
@@ -21,18 +21,17 @@ const ArticleList = () => {
       ))}
       <h1>Article List</h1>
       <ol>
-        <li>Gilligan's Island. Is it true?</li>
-        <li>A Baseball Moment</li>
-        <li>Poke Moment</li>
-        <li>Cool Cats</li>
-        <li>Why Am I At Home</li>
+      {articles.map(({ id, title }) => (
+        <li key={id}>
+          {title}
+        </li>
+      ))}
       </ol>
 
-      <Switch>
-        <Route path="/article/:id">
-          <SingleArticle />
+      <Routes>
+        <Route path="/article/:id" element ={ <SingleArticle />}>
         </Route>
-      </Switch>
+      </Routes>
     </div>
   );
 };

@@ -27,13 +27,14 @@ let enhancer;
 // Chrome extension for Redux DevTools will set up the DevTools in the browser.
 // (The checks in the conditional keep the Redux DevTools from breaking the app
 // if the app runs in a browser where the DevTools have not been installed.)
-if (process.env.NODE_ENV !== 'production') {
-  const logger = require('redux-logger').default;
-  const composeEnhancers =
-    typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true }) : compose;
-  enhancer = composeEnhancers(applyMiddleware(logger));
-}
+// !UNCOMMENT HERE
+// if (process.env.NODE_ENV !== 'production') {
+//   const logger = require('redux-logger').default;
+//   const composeEnhancers =
+//     typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+//     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: true }) : compose;
+//   enhancer = composeEnhancers(applyMiddleware(logger));
+// }
 
 // `createStore` creates a store object literal {} 
 // `preloadedState`--not important for now--is mainly used for hydrating state
