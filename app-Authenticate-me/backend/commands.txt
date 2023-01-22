@@ -33,3 +33,4 @@ yarn add --dev the following packages as dev-dependencies:
 ## Express setup
 
 1. Create app.js, routes/index.js, bin/www and add scripts to package.json
+2. Run npm start
