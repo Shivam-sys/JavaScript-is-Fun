@@ -60,6 +60,11 @@ yarn add --dev the following packages as dev-dependencies:
     - npx dotenv sequelize db:seed:undo / npx dotenv sequelize db:seed:undo:all
     - npx dotenv sequelize db:seed
 
+## backend finishing notes
+Now create appropriate routes -- see /routes for that, 
+apply proper validations,
+test each route using fetch, don't forget to provide XSRF token as header. (get from cookies tab in browser)
+
 ======== Commands worth remembering =========
 dropdb dbname : to delete db 
 psql -l : to see all database
