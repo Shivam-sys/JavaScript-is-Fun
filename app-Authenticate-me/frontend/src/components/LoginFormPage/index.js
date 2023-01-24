@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
+import "./LoginForm.scss";
 
 function LoginFormPage() {
   const dispatch = useDispatch();
@@ -30,7 +31,7 @@ function LoginFormPage() {
           <li key={idx}>{error}</li>
         ))}
       </ul>
-      <label>
+      <label className="email">
         Username or Email
         <input
           type="text"
@@ -39,7 +40,7 @@ function LoginFormPage() {
           required
         />
       </label>
-      <label>
+      <label className="password">
         Password
         <input
           type="password"
@@ -48,7 +49,9 @@ function LoginFormPage() {
           required
         />
       </label>
-      <button type="submit">Log In</button>
+      <button type="submit" className="login">
+        Log In
+      </button>
     </form>
   );
 }

@@ -13,6 +13,7 @@ function App() {
   return (
     isLoaded && (
       <Routes>
+        <Route path="/" element={<h1>Home</h1>} />
         <Route path="/login" element={<LoginFormPage />} />
       </Routes>
     )
