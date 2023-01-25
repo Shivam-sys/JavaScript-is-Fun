@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import LoginFormPage from "./components/LoginFormPage";
 import * as sessionActions from "./store/session";
+import SignupFormPage from "./components/SignupFormPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<h1>Home</h1>} />
         <Route path="/login" element={<LoginFormPage />} />
+        <Route path="/signup" element={<SignupFormPage />} />
       </Routes>
     )
   );

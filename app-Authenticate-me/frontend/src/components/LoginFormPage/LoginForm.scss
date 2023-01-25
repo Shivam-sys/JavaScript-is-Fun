@@ -37,13 +37,21 @@ form {
       border: none;
     }
   }
-  .login {
+  .btn {
     padding: 1em;
-    background: hsl(233, 36%, 38%);
+    background: hsl(0, 0%, 29%);
     color: hsl(0, 0, 100);
     border: none;
     border-radius: 8px;
     font-weight: 600;
+    &__primary {
+      background: hsl(233, 36%, 38%);
+    }
+    &__secondary {
+      background: auto;
+      text-decoration: none;
+      text-align: center;
+    }
   }
 
   button {

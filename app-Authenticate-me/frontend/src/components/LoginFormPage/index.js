@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "./LoginForm.scss";
 
 function LoginFormPage() {
@@ -49,9 +49,12 @@ function LoginFormPage() {
           required
         />
       </label>
-      <button type="submit" className="login">
+      <button type="submit" className="btn btn__primary">
         Log In
       </button>
+      <Link className="btn btn__secondary" to="/signup">
+        Sign Up
+      </Link>
     </form>
   );
 }
