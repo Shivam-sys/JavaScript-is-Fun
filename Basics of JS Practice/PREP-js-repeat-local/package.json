@@ -1,0 +1,16 @@
+{
+  "name": "js-repeat-local",
+  "version": "1.0.0",
+  "description": "",
+  "main": "problems.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "colors": "^1.4.0",
+    "mocha": "^9.0.2"
+  }
+}
