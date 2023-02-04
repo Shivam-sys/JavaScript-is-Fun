@@ -1,17 +1,22 @@
-// Implememnt debouncing in JS
- var button = document.getElementById("debounce");
-    const debounce = (func, delay) => {
-        let debounceTimer
-        return function() {
-            const context = this
-            const args = arguments
-                clearTimeout(debounceTimer)
-                    debounceTimer
-                = setTimeout(() => func.apply(context, args), delay)
-        }
-    }
-    button.addEventListener('click', debounce(function() {
-            alert("Hello\nNo matter how many times you" +
-                "click the debounce button, I get " +
-                "executed once every 3 seconds!!")
-                            }, 3000));
+let input = document.getElementById("textbox");
+let defaultout = document.getElementById("default");
+let debounceout = document.getElementById("debounce");
+
+const updateDebounceText = debounce((text) => {
+  debounceout.textContent = text;
+}, 1000);
+
+document.addEventListener("input", (e) => {
+  defaultout.textContent = e.target.value;
+  updateDebounceText(e.target.value);
+});
+
+function debounce(cb, delay) {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      cb(args);
+    }, delay);
+  };
+}
